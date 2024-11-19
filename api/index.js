@@ -156,18 +156,13 @@ app.post(
       const { path, originalname, mimetype } = req.files[i];
       const url = await uploadToS3(path, originalname, mimetype);
       uploadedFiles.push(url);
-      // const parts = originalname.split(".");
-      // const ext = parts[parts.length - 1];
-      // const newPath = path + "." + ext;
-      // fs.renameSync(path, newPath);
-      // uploadedFiles.push(newPath.replace("uploads/", ""));
     }
     res.json(uploadedFiles);
   }
 );
 
 // prettier-ignore
-app.post("/api/places", async (req, res) => {
+app.post("/api/places", (req, res) => {
   mongoose.connect(process.env.MONGO_URL);
   const { token } = req.cookies;
   const {title, address, addedPhotos, description, perks, extraInfo, checkIn, checkOut, maxGuests, price} = req.body;
@@ -181,7 +176,7 @@ app.post("/api/places", async (req, res) => {
   });
 });
 
-app.get("/api/user-places", async (req, res) => {
+app.get("/api/user-places", (req, res) => {
   mongoose.connect(process.env.MONGO_URL);
   const { token } = req.cookies;
   jwt.verify(token, jwtSecret, {}, async (err, userData) => {
@@ -198,7 +193,7 @@ app.get("/api/places/:id", async (req, res) => {
 });
 
 // prettier-ignore
-app.put("/api/places", async (req, res) => {
+app.put("/api/places", (req, res) => {
   mongoose.connect(process.env.MONGO_URL);
   const { token } = req.cookies;
   const {id, title, address, addedPhotos, description, perks, extraInfo, checkIn, checkOut, maxGuests, price} = req.body;
