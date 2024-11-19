@@ -67,12 +67,12 @@ function getUserDataFromReq(req) {
 }
 
 app.get("/api/test", (req, res) => {
-  mongoose.connect(process.env.MONGO_URL);
+  mongoose.connect(process.env.MONGODB_URI);
   res.json("test ok");
 });
 
 app.post("/api/register", async (req, res) => {
-  mongoose.connect(process.env.MONGO_URL);
+  mongoose.connect(process.env.MONGODB_URI);
   const { name, email, password } = req.body;
   try {
     const userDoc = await User.create({
@@ -87,7 +87,7 @@ app.post("/api/register", async (req, res) => {
 });
 
 app.post("/api/login", async (req, res) => {
-  mongoose.connect(process.env.MONGO_URL);
+  mongoose.connect(process.env.MONGODB_URI);
   const { email, password } = req.body;
   const userDoc = await User.findOne({ email });
   if (userDoc) {
@@ -113,7 +113,7 @@ app.post("/api/login", async (req, res) => {
 });
 
 app.get("/api/profile", (req, res) => {
-  mongoose.connect(process.env.MONGO_URL);
+  mongoose.connect(process.env.MONGODB_URI);
   const { token } = req.cookies;
   // res.json({ token });
   if (token) {
@@ -163,7 +163,7 @@ app.post(
 
 // prettier-ignore
 app.post("/api/places", (req, res) => {
-  mongoose.connect(process.env.MONGO_URL);
+  mongoose.connect(process.env.MONGODB_URI);
   const { token } = req.cookies;
   const {title, address, addedPhotos, description, perks, extraInfo, checkIn, checkOut, maxGuests, price} = req.body;
   jwt.verify(token, jwtSecret, {}, async (err, userData) => {
@@ -177,7 +177,7 @@ app.post("/api/places", (req, res) => {
 });
 
 app.get("/api/user-places", (req, res) => {
-  mongoose.connect(process.env.MONGO_URL);
+  mongoose.connect(process.env.MONGODB_URI);
   const { token } = req.cookies;
   jwt.verify(token, jwtSecret, {}, async (err, userData) => {
     if (err) throw err;
@@ -187,14 +187,14 @@ app.get("/api/user-places", (req, res) => {
 });
 
 app.get("/api/places/:id", async (req, res) => {
-  mongoose.connect(process.env.MONGO_URL);
+  mongoose.connect(process.env.MONGODB_URI);
   const { id } = req.params;
   res.json(await Place.findById(id));
 });
 
 // prettier-ignore
 app.put("/api/places", (req, res) => {
-  mongoose.connect(process.env.MONGO_URL);
+  mongoose.connect(process.env.MONGODB_URI);
   const { token } = req.cookies;
   const {id, title, address, addedPhotos, description, perks, extraInfo, checkIn, checkOut, maxGuests, price} = req.body;
   jwt.verify(token, jwtSecret, {}, async (err, userData) => {
@@ -209,13 +209,13 @@ app.put("/api/places", (req, res) => {
 });
 
 app.get("/api/places", async (req, res) => {
-  mongoose.connect(process.env.MONGO_URL);
+  mongoose.connect(process.env.MONGODB_URI);
   res.json(await Place.find());
 });
 
 // prettier-ignore
 app.post("/api/bookings", async (req, res) => {
-  mongoose.connect(process.env.MONGO_URL);
+  mongoose.connect(process.env.MONGODB_URI);
   const userData = await getUserDataFromReq(req);
   const { place, checkIn, checkOut, numberOfGuests, name, phone, price } =
     req.body;
@@ -230,7 +230,7 @@ app.post("/api/bookings", async (req, res) => {
 });
 
 app.get("/api/bookings", async (req, res) => {
-  mongoose.connect(process.env.MONGO_URL);
+  mongoose.connect(process.env.MONGODB_URI);
   const userData = await getUserDataFromReq(req);
   res.json(await Booking.find({ user: userData.id }).populate("place"));
 });
