@@ -64,7 +64,9 @@ export default function PhotosUploader({ addedPhotos, onChange }) {
         {addedPhotos.length > 0 &&
           addedPhotos.map((link) =>
             // prettier-ignore
-            <div className="h-32 flex relative" key={link}>
+            <div className="h-32 flex relative" 
+            // key={link}
+            >
               <Image className="rounded-2xl w-full object-cover " src={link} alt=""/>
               <button onClick={ev=>removePhoto(ev, link)} className="cursor-pointer absolute bottom-1 right-1 text-white bg-black bg-opacity-40 rounded-2xl py-2 px-3">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">

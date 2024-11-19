@@ -7,7 +7,7 @@ export default function IndexPage() {
   const [places, setPlaces] = useState([]);
   useEffect(() => {
     axios.get("/places").then((response) => {
-      setPlaces(response.data.data);
+      setPlaces(response.data);
     });
   }, []);
   return (

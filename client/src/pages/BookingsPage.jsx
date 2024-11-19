@@ -23,7 +23,7 @@ export default function BookingsPage() {
             //   {booking.checkIn} - {booking.checkOut}
             // </div>
             <Link
-              key={booking.place}
+              // key={booking.place}
               to={`/account/bookings/${booking._id}`}
               className="flex gap-4 bg-gray-200 rounded-2xl overflow-hidden"
             >
