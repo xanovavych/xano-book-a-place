@@ -12,5 +12,5 @@ export default function IndexPage() {
   }, []);
 
   console.log(places);
-  return <div>{places.length > 0 && <div>{places[0].title}</div>}</div>;
+  return <div>{places.length > 0 && <div>{places[0].title} test</div>}</div>;
 }
