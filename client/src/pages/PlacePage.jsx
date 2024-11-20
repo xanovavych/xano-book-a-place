@@ -27,15 +27,24 @@ export default function PlacePage() {
       <PlaceGallery place={place} />
       <div className="mt-8 mb-8 gap-8 grid grid-cols-1 md:grid-cols-[2fr_1fr]">
         <div>
-          <div className="my-4">
+          <div className="my-4  whitespace-pre-line">
             <h2 className="font-semibold text-2xl">Description</h2>
             {place.description}
           </div>
+          <div className="my-4">
+            <h2 className="font-semibold text-2xl">Perks</h2>
+            {place.perks.length > 0 &&
+              place.perks.map((allprops) => (
+                <div key={allprops}>{allprops}</div>
+              ))}
+          </div>
+          <h2 className="font-semibold text-2xl">Booking Info</h2>
           Check-in time: {place.checkIn}
           <br />
           Check-out time: {place.checkOut}
           <br />
           Max guests: {place.maxGuests}
+          <br />
         </div>
         <div>
           <BookingWidget place={place} />
@@ -45,7 +54,7 @@ export default function PlacePage() {
         <div>
           <h2 className="font-semibold text-2xl">Extra info</h2>
         </div>
-        <div className="mb-4 mt-1 text-sm text-gray-700 leading-5">
+        <div className="mb-4 mt-1 text-sm text-gray-700 leading-5 whitespace-pre-line">
           {place.extraInfo}
         </div>
       </div>
